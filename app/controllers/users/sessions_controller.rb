@@ -1,4 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
+  before_action :authenticate_user!, except: [ :new, :create ]
+
   # GET /resource/sign_in
   def new
     render inertia: "Auth/Login", props: {

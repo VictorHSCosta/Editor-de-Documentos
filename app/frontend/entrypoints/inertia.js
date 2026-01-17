@@ -16,7 +16,8 @@ createInertiaApp({
     }
 
     // Define o layout se não existir um específico na página
-    page.default.layout = page.default.layout || ((pageComponent) => createElement(Layout, { children: pageComponent }))
+    page.default.layout =
+      page.default.layout || ((pageComponent) => createElement(Layout, { children: pageComponent }))
 
     return page
   },

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
 
-  inertia_share current_user: -> { serializer(current_user, UserSerializer) }
+  inertia_share current_user: -> { current_user ? serializer(current_user, UserSerializer) : nil }
 
   # serializer helper method using Panko
   def serializer(resource, serializer_class)
