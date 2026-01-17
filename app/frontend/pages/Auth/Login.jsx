@@ -32,7 +32,7 @@ export default function Login() {
               <label className="text-primary-950 text-xs">Email</label>
               <input
                 type="email"
-                requered
+                required
                 className="border-primary-100 w-full border-b p-2 text-xs focus:outline-none"
                 value={data.user.email}
                 onChange={(e) => setData('user', { ...data.user, email: e.target.value })}
