@@ -1,4 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :authenticate_user!, except: [ :new, :create ]
+
   # GET /users/sign_up
   # Exibe o formulário de cadastro
   def new

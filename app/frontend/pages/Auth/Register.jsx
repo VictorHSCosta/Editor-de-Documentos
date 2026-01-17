@@ -1,4 +1,5 @@
 import { useForm } from '@inertiajs/react'
+import PasswordInput from '../../components/Forms/PasswordInput'
 
 export default function Register({ errors: serverErrors = {} }) {
   const { data, setData, post, processing, errors } = useForm({
@@ -35,22 +36,18 @@ export default function Register({ errors: serverErrors = {} }) {
               <input
                 type="email"
                 required
-                className="focus:outline-none w-full border-b border-primary-100 p-2 text-xs"
+                className="border-primary-100 w-full border-b p-2 text-xs focus:outline-none"
                 value={data.user.email}
                 onChange={(e) => setData('user', { ...data.user, email: e.target.value })}
               />
-              {allErrors.email && <div className="mt-1 text-xs text-red-500">{allErrors.email[0]}</div>}
+              {allErrors.email && (
+                <div className="mt-1 text-xs text-red-500">{allErrors.email[0]}</div>
+              )}
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-primary-950 text-xs">Senha</label>
-              <input
-                type="password"
-                required
-                value={data.user.password}
-                className="focus:outline-none w-full border-b border-primary-100 p-2 text-xs"
-                onChange={(e) => setData('user', { ...data.user, password: e.target.value })}
-              />
+              <PasswordInput data={data} setData={setData} />
               {allErrors.password && (
                 <div className="mt-1 text-xs text-red-500">{allErrors.password[0]}</div>
               )}
@@ -58,24 +55,18 @@ export default function Register({ errors: serverErrors = {} }) {
 
             <div className="flex flex-col gap-2">
               <label className="text-primary-950 text-xs">Confirmar Senha</label>
-              <input
-                type="password"
-                required
-                value={data.user.password_confirmation}
-                className="focus:outline-none w-full border-b border-primary-100 p-2 text-xs"
-                onChange={(e) =>
-                  setData('user', { ...data.user, password_confirmation: e.target.value })
-                }
-              />
+              <PasswordInput data={data} setData={setData} name="password_confirmation" />
               {allErrors.password_confirmation && (
-                <div className="mt-1 text-xs text-red-500">{allErrors.password_confirmation[0]}</div>
+                <div className="mt-1 text-xs text-red-500">
+                  {allErrors.password_confirmation[0]}
+                </div>
               )}
             </div>
 
             <button
               type="submit"
               disabled={processing}
-              className="mt-12 rounded-3xl bg-primary-200 p-2 text-sm text-primary-600 transition hover:bg-primary-300"
+              className="bg-primary-200 text-primary-600 hover:bg-primary-300 mt-12 rounded-3xl p-2 text-sm transition"
             >
               {processing ? 'Cadastrando...' : 'Cadastrar'}
             </button>
@@ -89,7 +80,7 @@ export default function Register({ errors: serverErrors = {} }) {
           </a>
         </p>
       </div>
-      <div className="flex h-full w-full items-center justify-center bg-primary-50">
+      <div className="bg-primary-50 flex h-full w-full items-center justify-center">
         <img src="/login.png" alt="Register illustration" />
       </div>
     </div>
