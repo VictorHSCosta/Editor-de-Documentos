@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react'
 
 export default function Register({ errors: serverErrors = {} }) {
   const { data, setData, post, processing, errors } = useForm({
@@ -6,108 +6,92 @@ export default function Register({ errors: serverErrors = {} }) {
       email: '',
       password: '',
       password_confirmation: '',
-    }
-  });
+    },
+  })
 
   const submit = (e) => {
-    e.preventDefault();
-    post('/users');
-  };
+    e.preventDefault()
+    post('/users')
+  }
 
   // Mescla erros do servidor com erros do cliente
-  const allErrors = { ...serverErrors, ...errors };
+  const allErrors = { ...serverErrors, ...errors }
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Criar nova conta
-        </h2>
-      </div>
-
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={submit}>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-              Email
-            </label>
-            <div className="mt-2">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                value={data.user.email}
-                onChange={e => setData('user', { ...data.user, email: e.target.value })}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-              {allErrors.email && (
-                <p className="mt-1 text-sm text-red-600">{allErrors.email[0]}</p>
-              )}
-            </div>
+    <div className="text-primary-950 grid min-h-screen grid-cols-1 md:grid-cols-2">
+      <div className="flex h-full flex-col justify-between p-8">
+        <div className="flex w-full flex-col items-center justify-center gap-24 p-24">
+          <div className="flex flex-col gap-4">
+            <h1 className="text-3xl font-light uppercase">
+              Junte-se a nós e <br></br> transforme suas ideias em realidade!
+            </h1>
+            <p className="text-primary-900 text-sm">
+              Cadastre-se e comece a escrever com o poder da IA.
+            </p>
           </div>
-
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-              Senha
-            </label>
-            <div className="mt-2">
+          <form className="font flex w-[450px] flex-col gap-4" onSubmit={submit}>
+            <div className="flex flex-col gap-2">
+              <label className="text-primary-950 text-xs">Email</label>
               <input
-                id="password"
-                name="password"
+                type="email"
+                required
+                className="focus:outline-none w-full border-b border-primary-100 p-2 text-xs"
+                value={data.user.email}
+                onChange={(e) => setData('user', { ...data.user, email: e.target.value })}
+              />
+              {allErrors.email && <div className="mt-1 text-xs text-red-500">{allErrors.email[0]}</div>}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-primary-950 text-xs">Senha</label>
+              <input
                 type="password"
-                autoComplete="new-password"
                 required
                 value={data.user.password}
-                onChange={e => setData('user', { ...data.user, password: e.target.value })}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="focus:outline-none w-full border-b border-primary-100 p-2 text-xs"
+                onChange={(e) => setData('user', { ...data.user, password: e.target.value })}
               />
               {allErrors.password && (
-                <p className="mt-1 text-sm text-red-600">{allErrors.password[0]}</p>
+                <div className="mt-1 text-xs text-red-500">{allErrors.password[0]}</div>
               )}
             </div>
-          </div>
 
-          <div>
-            <label htmlFor="password_confirmation" className="block text-sm font-medium leading-6 text-gray-900">
-              Confirmar Senha
-            </label>
-            <div className="mt-2">
+            <div className="flex flex-col gap-2">
+              <label className="text-primary-950 text-xs">Confirmar Senha</label>
               <input
-                id="password_confirmation"
-                name="password_confirmation"
                 type="password"
-                autoComplete="new-password"
                 required
                 value={data.user.password_confirmation}
-                onChange={e => setData('user', { ...data.user, password_confirmation: e.target.value })}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="focus:outline-none w-full border-b border-primary-100 p-2 text-xs"
+                onChange={(e) =>
+                  setData('user', { ...data.user, password_confirmation: e.target.value })
+                }
               />
               {allErrors.password_confirmation && (
-                <p className="mt-1 text-sm text-red-600">{allErrors.password_confirmation[0]}</p>
+                <div className="mt-1 text-xs text-red-500">{allErrors.password_confirmation[0]}</div>
               )}
             </div>
-          </div>
 
-          <div>
             <button
               type="submit"
               disabled={processing}
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-400"
+              className="mt-12 rounded-3xl bg-primary-200 p-2 text-sm text-primary-600 transition hover:bg-primary-300"
             >
               {processing ? 'Cadastrando...' : 'Cadastrar'}
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
+        <p className="text-primary-900 text-center text-sm">
           Já tem uma conta?{' '}
-          <a href="/users/sign_in" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+          <a href="/users/sign_in" className="text-primary-800 hover:underline">
             Faça login
           </a>
         </p>
       </div>
+      <div className="flex h-full w-full items-center justify-center bg-primary-50">
+        <img src="/login.png" alt="Register illustration" />
+      </div>
     </div>
-  );
+  )
 }

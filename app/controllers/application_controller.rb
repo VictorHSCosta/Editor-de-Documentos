@@ -2,12 +2,12 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [ :new, :create ]
 
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
 
-  inertia_share current_user: -> { serializer(current_user, UserSerializer) }
+  inertia_share current_user: -> { current_user ? serializer(current_user, UserSerializer) : nil }
 
   # serializer helper method using Panko
   def serializer(resource, serializer_class)
