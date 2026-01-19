@@ -15,15 +15,25 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_15_131848) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "documents", force: :cascade do |t|
+    t.bigint "author_id", null: false
     t.text "content"
     t.datetime "created_at", null: false
+    t.bigint "folder_id"
     t.integer "link_id"
-    t.string "password_digest"
     t.integer "permission", null: false
     t.string "title", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_documents_on_user_id"
+    t.index ["author_id"], name: "index_documents_on_author_id"
+    t.index ["folder_id"], name: "index_documents_on_folder_id"
+  end
+
+  create_table "folders", force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "permission"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_folders_on_author_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,5 +48,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_15_131848) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "documents", "users"
+  add_foreign_key "documents", "folders"
+  add_foreign_key "documents", "users", column: "author_id"
+  add_foreign_key "folders", "users", column: "author_id"
 end
