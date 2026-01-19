@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_15_131848) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_19_115750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "document_permissions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "document_id", null: false
+    t.integer "role", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["document_id"], name: "index_document_permissions_on_document_id"
+    t.index ["user_id"], name: "index_document_permissions_on_user_id"
+  end
 
   create_table "documents", force: :cascade do |t|
     t.bigint "author_id", null: false
@@ -48,6 +58,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_15_131848) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "document_permissions", "documents"
+  add_foreign_key "document_permissions", "users"
   add_foreign_key "documents", "folders"
   add_foreign_key "documents", "users", column: "author_id"
   add_foreign_key "folders", "users", column: "author_id"
