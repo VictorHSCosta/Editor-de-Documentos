@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_19_115750) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_19_120557) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -35,6 +35,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_19_115750) do
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_documents_on_author_id"
     t.index ["folder_id"], name: "index_documents_on_folder_id"
+  end
+
+  create_table "folder_permissions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "folder_id", null: false
+    t.integer "role", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["folder_id"], name: "index_folder_permissions_on_folder_id"
+    t.index ["user_id"], name: "index_folder_permissions_on_user_id"
   end
 
   create_table "folders", force: :cascade do |t|
@@ -62,5 +72,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_19_115750) do
   add_foreign_key "document_permissions", "users"
   add_foreign_key "documents", "folders"
   add_foreign_key "documents", "users", column: "author_id"
+  add_foreign_key "folder_permissions", "folders"
+  add_foreign_key "folder_permissions", "users"
   add_foreign_key "folders", "users", column: "author_id"
 end
