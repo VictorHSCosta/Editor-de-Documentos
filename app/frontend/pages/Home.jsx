@@ -3,7 +3,7 @@ import RichTextEditor from '../components/RichTextEditor'
 
 const Home = () => {
   return (
-    <div>
+    <div className="h-full w-full">
       Home
       <RichTextEditor />
     </div>

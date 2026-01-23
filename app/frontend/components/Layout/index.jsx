@@ -1,8 +1,13 @@
+import GeneralError from './GeneralError'
+import ReactErrorBoundary from '../../entrypoints/ReactErrorBoundary'
+
 const Layout = ({ children }) => {
   return (
-    <main>
-      <article>{children}</article>
-    </main>
+    <ReactErrorBoundary fallback={<GeneralError />}>
+      <main className="h-screen w-full overflow-auto">
+        <article className="h-full">{children}</article>
+      </main>
+    </ReactErrorBoundary>
   )
 }
 

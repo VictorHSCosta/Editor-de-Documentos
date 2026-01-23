@@ -168,6 +168,33 @@ Sinta-se em casa 🧠💻
 
 ---
 
+
+### Arquitetura do projeto 
+RichTextEditor/
+  index.jsx                # exporta o componente principal (entry point)
+
+  RichTextEditor.jsx       # componente “container” do editor
+
+  toolbar/
+    Toolbar.jsx            # barra inteira
+    ToolbarButton.jsx      # botão genérico
+    ToolbarSelect.jsx      # select genérico (fonte, tamanho, etc)
+    toolbarConfig.js       # definição dos botões (tipo: bold, italic, etc)
+
+  editor/
+    EditorArea.jsx         # <div contentEditable> + ref
+    useEditorDom.js        # hook que fala com o DOM (selection, comandos)
+
+  state/
+    useEditorState.js      # se quiser controlar coisas em React (modo, tema etc)
+
+  dom/
+    selection.js           # helpers só de seleção
+    commands.js            # helpers que aplicam bold, italic, heading etc
+    clipboard.js           # (opcional) copiar/colar custom
+
+  styles.css               # estilos específicos do editor (ou .module.css)
+
 ## ⭐ Se curtir, deixe uma estrela no repositório :)
 
 Apoia demais quem compartilha conteúdo open source 💙
