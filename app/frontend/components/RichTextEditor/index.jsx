@@ -1,9 +1,11 @@
-import React from 'react'
+import EditorArea from './editor/EditorArea'
+import Toolbar from './toolbar/Toolbar'
 
 const RichTextEditor = () => {
   return (
     <div>
-      <textarea className="h-[90px] w-full" type="text" />
+      <Toolbar />
+      <EditorArea />
     </div>
   )
 }
