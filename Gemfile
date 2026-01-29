@@ -77,6 +77,6 @@ gem "inertia_rails", "~> 3.11"
 
 gem "vite_rails", "~> 3.0"
 
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 
 gem "panko_serializer"
